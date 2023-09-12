@@ -62,7 +62,10 @@ router.beforeEach((to, from, next) => {
         } else {
             next();
         }
-    } else {
+    } else if(to.path == '/' || to.path == '/path' || to.path == '/register'){
+        //如果已经登录，则进入公共页面可以直接进入
+        next();
+    }else{
         console.log('user_permission***',user_permission);
         console.log(user_permission.indexOf(to.path));
         console.log('to.path', to.path);

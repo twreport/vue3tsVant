@@ -21,7 +21,7 @@ const logout = () => {
   userStore.$reset();
   menuStore.$reset();
   sessionStorage.clear();
-  location.replace('/home')
+  location.replace('/vant/#/home')
 };
 
 </script>

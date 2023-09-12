@@ -55,9 +55,10 @@ const onSubmit = () => {
                 menuStore.setUserPermission(res.data.user_permission);
 
                 //务必使用location.replace
+                // 匹配部署后的hash路由，需写成下面的鬼样子
+                location.replace('/vant/#/home')
                 //否则会导致闪屏
                 //或者sessionStorage无法正常加载
-                location.replace('/home')
             }
         });
 };
