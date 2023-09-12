@@ -12,14 +12,14 @@ import { useMenuStore } from "@/store/menu";
 
 
 router.beforeEach((to, from, next) => {
-    console.log(from);
+    console.log("from",from);
     const userStore = useUserStore();
     const menuStore = useMenuStore();
 
 
     const access_token: string | null = userStore.access_token;
     const expires: number | null = userStore.expires;
-    const user_permission: string | null = menuStore.user_permission;
+    const user_permission: string[] | null = menuStore.user_permission;
 
     console.log('userStore', userStore);
     console.log('menuStore', menuStore);
@@ -37,8 +37,12 @@ router.beforeEach((to, from, next) => {
     console.log('============to============');
     console.log(access_token);
     
-    console.log(to.path);
-    
+    // console.log(to.path);
+    // if(to.path == "/login"){
+    //     next();
+    // }else{
+
+    // }
 
     if (access_token === '' || access_token === undefined || access_token === null) {
         //如果token不存在,则直接进入登录页面
@@ -59,6 +63,9 @@ router.beforeEach((to, from, next) => {
             next();
         }
     } else {
+        console.log('user_permission***',user_permission);
+        console.log(user_permission.indexOf(to.path));
+        console.log('to.path', to.path);
         //如果一切正常则检验用户是否有登录权限
         if(user_permission && user_permission.indexOf(to.path) > -1){
         //如果没问题就正常进入页面

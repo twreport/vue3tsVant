@@ -4,18 +4,7 @@ import { AxiosResponse } from "axios";
 import { showNotify } from 'vant';
 
 // 因为本文件在pinia加载之前加载，因此只能使用sessionStorage
-const userStoreStr = sessionStorage.getItem('userStore');
-let userStore = {
-    access_token: ''
-};
-console.log('userStoreStr',userStoreStr);
-
-if(userStoreStr){
-  userStore = JSON.parse(userStoreStr);
-}
-
-const access_token = userStore.access_token;
-console.log('token', access_token);
+const access_token = sessionStorage.getItem('access_token');
 
 const request = axios.create({
     baseURL: import.meta.env.VITE_APP_BASE_API,

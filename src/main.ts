@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import router from './router'
 import App from './App.vue'
 import { createPinia } from 'pinia'
-import piniaPluginPersist from 'pinia-plugin-persist'
+// import piniaPersist from 'pinia-plugin-persist'
 
 // 引入Vant组件样式
 import 'vant/lib/index.css';
@@ -11,7 +11,9 @@ const app = createApp(App);
 
 // 引入pinia并持久化
 const pinia = createPinia();
-pinia.use(piniaPluginPersist);
+
+// pinia.use(piniaPersist);
+
 app.use(pinia);
 
 app.use(router);
@@ -23,3 +25,4 @@ import "./permission.ts";
 import { ConfigProvider } from 'vant';
 app.use(ConfigProvider);
 app.mount('#app')
+

@@ -40,6 +40,7 @@ const password = ref('');
 
 
 const onSubmit = () => {
+    
 
     loginApi
         .login(username.value, password.value)
@@ -60,7 +61,6 @@ const onSubmit = () => {
             }
         });
 };
-
 
 const goRegister = () => {
     console.log('register!');

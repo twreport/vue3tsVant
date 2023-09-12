@@ -11,18 +11,12 @@ interface UserMenu {
 export const useMenuStore = defineStore('menu', {
     // other options...
     state: () => {
+        const userMenuSession = sessionStorage.getItem('user_menu');
+        const userPermissionSession = sessionStorage.getItem('user_permission');
         return {
-            'user_menu': null,
-            'user_permission': null
+            'user_menu': userMenuSession?JSON.parse(userMenuSession):[{title:'',path:''}],
+            'user_permission': userPermissionSession?userPermissionSession.split(','):['']
         }
-    },
-    persist: {
-        enabled: true,
-        strategies: [
-            {
-              key: 'menuStore'
-            },
-          ]
     },
     getters: {
         getUserMenu(): UserMenu[] {
@@ -35,9 +29,11 @@ export const useMenuStore = defineStore('menu', {
     actions: {
         setUserMenu(user_menu: UserMenu[]): void {
             this.user_menu = user_menu;
+            sessionStorage.setItem('user_menu',JSON.stringify(user_menu))
         },
         setUserPermission(user_permission: string[]): void {
             this.user_permission = user_permission;
+            sessionStorage.setItem('user_permission',user_permission.join(','))
         }
     }
 })

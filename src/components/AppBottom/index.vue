@@ -11,11 +11,8 @@
 import {ref} from "vue";
 import { useUserStore } from "@/store/user";
 import { useMenuStore } from "@/store/menu";
-import { useRouter } from "vue-router";
 
-const router = useRouter();
 const userStore = useUserStore();
-
 const menuStore = useMenuStore();
 
 const active = ref(0);
@@ -24,7 +21,7 @@ const logout = () => {
   userStore.$reset();
   menuStore.$reset();
   sessionStorage.clear();
-  router.push("/login");
+  location.replace('/home')
 };
 
 </script>
