@@ -3,21 +3,22 @@ import { AxiosResponse } from "axios";
 // Notify
 import { showNotify } from 'vant';
 
-// 因为本文件在pinia加载之前加载，因此只能使用sessionStorage
-const access_token = sessionStorage.getItem('access_token');
 
 const request = axios.create({
     baseURL: import.meta.env.VITE_APP_BASE_API,
     // 超时设置
     timeout: 15000,
     headers: {
-        'access_token': access_token,
+        'access_token': '',
         'Content-Type': 'application/json;charset=utf-8'
     }
 })
 
 request.interceptors.request.use(
     (config) => {
+        // 因为本文件在pinia加载之前加载，因此只能在拦截时使用sessionStorage
+        const access_token = sessionStorage.getItem('access_token');
+        config.headers.access_token = access_token;
         return config;
     }
 );
