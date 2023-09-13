@@ -2,6 +2,7 @@ import axios from "axios";
 import { AxiosResponse } from "axios";
 // Notify
 import { showNotify } from 'vant';
+import { useUserStore } from "@/store/user";
 
 
 const request = axios.create({
@@ -16,8 +17,9 @@ const request = axios.create({
 
 request.interceptors.request.use(
     (config) => {
-        // 因为本文件在pinia加载之前加载，因此只能在拦截时使用sessionStorage
-        const access_token = sessionStorage.getItem('access_token');
+        // 因为本文件在pinia加载之前加载，因此只能在拦截时才读取store
+        const userStore = useUserStore();
+        const access_token = userStore.access_token;        
         config.headers.access_token = access_token;
         return config;
     }
